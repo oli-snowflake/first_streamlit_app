@@ -4,9 +4,9 @@ import snowflake.connector
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
-my_data_row = my_cur.fetchone()
-st.text("Hello from Snowflake:")
-st.text(my_data_row)
+my_data_rows = my_cur.fetchall()
+st.header("Hello from Snowflake:")
+st.dataframe(my_data_rows)
 
 st.title("This is my first streamlit cloud app !! ")
 
