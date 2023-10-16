@@ -27,9 +27,10 @@ st.dataframe(fruits_to_show)
 st.header("Fruityvice Fruit Advice!")
 
 import requests
-fruit_name = "kiwi"
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_name}")
-st.text(fruityvice_response.json())
+fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+st.write('The user entered ', fruit_choice)
+fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
+##st.text(fruityvice_response.json())
 
 # write your own comment -what does the next line do? 
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
