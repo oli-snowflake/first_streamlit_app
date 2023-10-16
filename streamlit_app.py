@@ -27,7 +27,7 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 fruits_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index))
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-
+add_fruits_selected = 
 
 # Display the table on the page.
 st.dataframe(fruits_to_show)
@@ -39,6 +39,8 @@ fruit_choice = st.text_input('What fruit would you like information about?','Kiw
 st.write('The user entered ', fruit_choice)
 fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
 ##st.text(fruityvice_response.json())
+add_fruits_selected = st.text_input('What fruit would you like to add ?','jackfruit')
+st.write('Add fruit selected ', add_fruits_selected)
 
 # write your own comment -what does the next line do? 
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
