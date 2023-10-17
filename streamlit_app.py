@@ -4,7 +4,7 @@ from urllib.error import URLError
 
 
 def insert_row_snowflake(new_fruit) : 
-    with my_cur = my_cnx.cursor() :
+    with my_cnx.cursor() as my_cur :
         my_cur.execute(f"insert into fruit_load_list values ('{new_fruit}')")
 
 
