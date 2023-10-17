@@ -37,7 +37,7 @@ st.header("Fruityvice Fruit Advice!")
 
 import requests
 try :
-    fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+    fruit_choice = st.text_input('What fruit would you like information about?')
     if not fruit_choice :
         st.error("Please  choose a fruit !")
     else :
