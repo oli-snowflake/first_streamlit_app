@@ -36,15 +36,21 @@ st.dataframe(fruits_to_show)
 st.header("Fruityvice Fruit Advice!")
 
 import requests
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
+try :
+    fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+    if not fruit_choice :
+        st.error("Please  choose a fruit !")
+    else :
+        st.write('The user entered ', fruit_choice)
+        fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
+        # write your own comment -what does the next line do? 
+        fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+        # write your own comment - what does this do?
+        st.dataframe(fruityvice_normalized)
+except URLError as e :
+    st.error()
 ##st.text(fruityvice_response.json())
 st.stop()
-add_fruits_selected = st.text_input('What fruit would you like to add ?','jackfruit')
-st.write('Add fruit selected ', add_fruits_selected)
 
-# write your own comment -what does the next line do? 
-fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-# write your own comment - what does this do?
-st.dataframe(fruityvice_normalized)
+
+
