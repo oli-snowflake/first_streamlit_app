@@ -1,6 +1,7 @@
 import streamlit as st
 import snowflake.connector
-
+from urllib.error import URLError
+st.stop()
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
@@ -39,6 +40,7 @@ fruit_choice = st.text_input('What fruit would you like information about?','Kiw
 st.write('The user entered ', fruit_choice)
 fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
 ##st.text(fruityvice_response.json())
+st.stop()
 add_fruits_selected = st.text_input('What fruit would you like to add ?','jackfruit')
 st.write('Add fruit selected ', add_fruits_selected)
 
