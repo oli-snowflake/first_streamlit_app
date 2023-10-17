@@ -2,6 +2,12 @@ import streamlit as st
 import snowflake.connector
 from urllib.error import URLError
 
+
+def insert_row_snowflake(new_fruit) : 
+    with my_cur = my_cnx.cursor() :
+        my_cur.execute(f"insert into fruit_load_list values ('{new_fruit}')")
+
+
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
@@ -28,7 +34,7 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 fruits_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index))
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+
 
 # Display the table on the page.
 st.dataframe(fruits_to_show)
@@ -42,6 +48,7 @@ try :
         st.error("Please  choose a fruit !")
     else :
         st.write('The user entered ', fruit_choice)
+        insert_row_snowflake(fruit_choice)
         fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
         # write your own comment -what does the next line do? 
         fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
