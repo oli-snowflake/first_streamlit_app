@@ -1,7 +1,7 @@
 import streamlit as st
 import snowflake.connector
 from urllib.error import URLError
-st.stop()
+
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
